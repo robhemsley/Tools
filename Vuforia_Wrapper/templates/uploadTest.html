@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Qualcomm Vuforia - Target Creator</title>
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/js/bootstrap.js"></script>
+
+	<link rel="stylesheet" href="/static/css/bootstrap.css">
+
+	<script type="text/javascript">
+		file_count = 1;
+	
+	   function add() {
+	   		file_count += 1;   		
+	   		
+	   		output = '<div id="target_'+file_count+'" class="well"><h3>AR Target '+file_count+'</h3></br><div class="control-group"><label class="control-label" for="targetFile">Target Image:</label><div class="controls" style="padding-left:10px">';
+            output += '<input class="input-file" name="targetFile_'+file_count+'" id="targetFile_'+file_count+'" type="file"></div></div><div class="control-group"><label class="control-label" for="targetSize">Target Size:</label><div class="controls" style="padding-left:10px"><input class="input-text" name="targetSize_'+file_count+'" id="targetSize_'+file_count+'" type="text" value="247"></div></div></div>';
+			$('#all_targets').append(output);
+
+			$('#target_'+file_count).hide();
+			$('#target_'+file_count).fadeIn('slow');
+	   }
+	   
+	   function remove() {
+	   		if (file_count > 1){
+	   			 $('#target_'+file_count).fadeOut('slow', function() {
+	   			 	$('#target_'+file_count).remove();
+	   				file_count -= 1;	
+	   			});
+	   		}else{
+	   			alert("No more targets to remove");
+	   		}
+	   }
+	</script>
+
+</head>
+<body style="background-image: url(/static/img/grid-18px-masked.png); background-repeat: repeat-x;">
+
+<div class="container">
+	<div id="example" class="modal hide fade" style="display: none; ">
+   		<div class="modal-header">
+        	<h3>Generating Target Data - Merging & Downloading</h3>
+        </div>
+        
+        <div class="progress progress-striped active" style="margin-left: 40px; margin-right: 40px; margin-top: 18px;">
+			<div class="bar" style="width: 40%;"></div>
+		</div>
+    </div>
+  
+	<div class="row" id="login-container">
+    	<div class="span8 offset3">
+			<form action="upload" method="post" enctype="multipart/form-data" class="well" style="width:400px; margin-top:20px"> 
+				<h2>Vuforia Target Creator</h2>
+				<br/>
+				<div id='global_settings' class="well">
+					<h3>Settings</h3></br>
+					<div class="control-group">
+						<label class="control-label" for="loginUsername">Login Username:</label>
+						<div class="controls" style="padding-left:10px">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-user"></i></span>
+								<input class="input-text" name="username" id="loginUsername" type="text" value="vuforia.ar@gmail.com">
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="loginPassword">Login Password:</label>
+						<div class="controls" style="padding-left:10px">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-lock"></i></span>
+								<input class="input-text" name="password" id="loginPassword" type="password" value="default">
+							</div>
+						 </div>
+					</div>	
+					<div class="control-group">
+						<label class="control-label" for="projectName">Project Name (Max 5 Char):</label>
+						<div class="controls" style="padding-left:10px">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-font"></i></span>
+								<input class="input-text" name="projectname" id="projectName" type="text" value="Auto">
+							</div>
+						 </div>
+					</div>			
+					<div class="control-group">
+						<label class="control-label" for="deleteSetting">Remove Project After Download:</label>
+						<div class="controls" style="padding-left:10px">
+							<label class="checkbox inline">
+								<input type="checkbox" name="delete" id="deleteSetting" value="delete" checked>Delete Project
+							</label>
+						 </div>
+					</div>
+				</div>		
+				
+					
+				<div id="all_targets">
+					<div id='target_1' class="well">
+						<h3>AR Target 1</h3></br>
+						
+						<div class="control-group">
+							<label class="control-label" for="targetFile">Target Image:</label>
+							<div class="controls" style="padding-left:10px">
+								<input class="input-file" name="targetFile_1" id="targetFile" type="file">
+							 </div>
+						</div>
+						
+						<div class="control-group">
+							<label class="control-label" for="targetSize">Target Size:</label>
+							<div class="controls" style="padding-left:10px">
+								<div class="input-prepend">
+									<span class="add-on"><i class="icon-resize-full"></i></span>
+									<input class="input-text" name="targetSize_1" id="targetSize" type="text" value="247">
+								</div>
+							 </div>
+						</div>          		
+						
+					</div>
+				</div>
+		
+			
+				<input type="submit" class="btn" value="Create Targets" style="margin-right:15px" />
+						
+				
+				<a class="btn btn-small" href="javascript:add();"><i class="icon-plus-sign"></i></a>
+				<a class="btn btn-small" href="javascript:remove();"><i class="icon-minus-sign"></i></a>
+		
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
